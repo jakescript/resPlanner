@@ -23,7 +23,7 @@ function reservationView(reservations) {
         (
         ${new Date(reservation.createdAt).toLocaleDateString()}
         ${new Date(reservation.createdAt).toLocaleTimeString()}
-        )
+        )<button data-id='${reservation.id}'>X</button>
       </li>
     `
       )
@@ -56,4 +56,14 @@ window.addEventListener('hashchange', async (e) => {
   resList = await axios.get(`/api/users/${id}/reservations`);
   init();
   // reservList.innerHTML = reservationView(resList.data);
+});
+
+reservList.addEventListener('click', async (ev) => {
+  // console.log(ev.target);
+  if (ev.target.tagName === 'BUTTON') {
+    ev.preventDefault();
+    // console.log('clicked button');
+    const dataID = ev.target.getAttribute('data-id');
+    const todestroy = await axios.delete(`/api/reservations/${dataID}`);
+  }
 });
