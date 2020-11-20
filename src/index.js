@@ -59,10 +59,8 @@ window.addEventListener('hashchange', async (e) => {
 });
 
 reservList.addEventListener('click', async (ev) => {
-  // console.log(ev.target);
   if (ev.target.tagName === 'BUTTON') {
     ev.preventDefault();
-    // console.log('clicked button');
     const dataID = ev.target.getAttribute('data-id');
     const todestroy = await axios.delete(`/api/reservations/${dataID}`);
   }
